@@ -3,7 +3,34 @@ Movies.Movie = DS.Model.extend({
 	synopsis: DS.attr('string'),
 	image: DS.attr('string'),
 	releaseDate: DS.attr('date'),
-	director: DS.attr('string')
+	directors: DS.attr('string')
+});
+
+Movies.MovieAdapter = DS.RESTAdapter.extend({
+	host: 'http://mymovieapi.com',
+	
+	rootForType: function(type) {
+		return '';
+	}
+});
+
+Movies.MovieSerializer = DS.RESTSerializer.extend({
+	extractArray: function(store, primaryType, payload) {
+		console.log(payload.length + ' movies found');
+		var movies = [];
+		Ember.$.each(payload, function(index, movie) {
+			movies.push({
+				id: movie.imdb_id,
+				title: movie.title,
+				synopsis: movie.plot_simple,
+				image: movie.poster.cover,
+				releaseDate: movie.release_date,
+				directors: movie.directors 	
+			});
+		});
+		var postPayload = {movies: movies};
+		return this._super(store, primaryType, postPayload);
+	}
 });
 
 Movies.Movie.FIXTURES = [

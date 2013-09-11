@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Bootstrap 101 Template</title>
+    <title>Search Movies - Ember.js Sample</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
   </head>
   <body>
 	<script type="text/x-handlebars" data-template-name="movies">
@@ -22,9 +23,7 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-md-12">
-							{{outlet}}	
-						</div>
+						{{outlet}}	
 					</div>
 				</div>
 			</div>
@@ -32,7 +31,7 @@
     </script>
     <script type="text/x-handlebars" data-template-name="movies/search">
 		{{#each movie in searchResults}}
-			<div class="col-md-3">
+			<div class="col-sm-6 col-md-3 movie-box">
 				<div class="thumbnail">
 					<img {{bindAttr src="movie.image"}}>
 					<div class="caption">
@@ -41,7 +40,7 @@
 					</div>
 				</div>	
 			</div>
-		{{/each}}
+		{{/each}}		
     </script>
     
     <script src="js/libs/jquery-1.10.2.min.js"></script>

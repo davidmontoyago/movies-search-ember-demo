@@ -6,7 +6,7 @@ Movies.Router.map(function () {
 
 Movies.MoviesRoute = Ember.Route.extend({
 	model: function () {
-		return this.store.find('movie');
+		//TODO load recommended movies or something
 	}
 });
 
@@ -18,7 +18,7 @@ Movies.MoviesIndexRoute = Ember.Route.extend({
 
 Movies.MoviesSearchRoute = Ember.Route.extend({
 	model: function(params) {
-		var searchResults = this.store.find('movie');
+		var searchResults = this.store.findQuery('movie', {q: params.query, limit: 10});
 		return {query: params.query, searchResults: searchResults}
 	},
 

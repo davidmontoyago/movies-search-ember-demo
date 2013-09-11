@@ -7,7 +7,7 @@ Movies.MoviesController = Ember.ObjectController.extend({
 			if (!query || query.length === 0) {
                 return;
             }
-            var searchResults = this.store.find('movie');
+            var searchResults = this.store.findQuery('movie', {q: query, limit: 10});
 			this.transitionToRoute('movies.search', {query: query, searchResults: searchResults});
 		}
 	}
