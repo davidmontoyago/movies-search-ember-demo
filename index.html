@@ -12,7 +12,7 @@
 		<div class="container">
 			<div class="page-header">
 				<h1>Movie Search</h1>
-				<p class="lead">Demo application to list movies with Ember.js</p>
+				<p class="lead">Sample application with Ember.js</p>
 			</div>
 			<div class="row">
 				<div class="col-md-8">
@@ -30,13 +30,16 @@
 		</div>
     </script>
     <script type="text/x-handlebars" data-template-name="movies/search">
-		{{#each movie in searchResults}}
+		{{#each movie in searchResults itemController="movie"}}
 			<div class="col-sm-6 col-md-3 movie-box">
 				<div class="thumbnail">
 					<img {{bindAttr src="movie.image"}}>
 					<div class="caption">
 						<h3>{{movie.title}}</h3>
 						<p>{{movie.synopsis}}</p>
+						{{#if movie.directors}}
+							<p><b>{{directorInflection}}:&nbsp;</b>{{movie.directors}}</p>
+						{{/if}}
 					</div>
 				</div>	
 			</div>
