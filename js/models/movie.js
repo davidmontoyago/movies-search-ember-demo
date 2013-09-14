@@ -16,14 +16,15 @@ Movies.MovieAdapter = DS.RESTAdapter.extend({
 
 Movies.MovieSerializer = DS.RESTSerializer.extend({
 	extractArray: function(store, primaryType, payload) {
-		console.log(payload.length + ' movies found');
+		console.log(payload.total_found + ' movies found');
+		console.log(payload.result.length + ' movies retrieved');
 		var movies = [];
-		Ember.$.each(payload, function(index, movie) {
+		Ember.$.each(payload.result, function(index, movie) {			
 			movies.push({
 				id: movie.imdb_id,
 				title: movie.title,
 				synopsis: movie.plot_simple,
-				image: movie.poster.cover,
+				image: movie.poster ? movie.poster.cover : null,
 				releaseDate: movie.release_date,
 				directors: movie.directors 	
 			});

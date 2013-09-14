@@ -7,19 +7,16 @@ Movies.MoviesController = Ember.ObjectController.extend({
 			if (!query || query.length === 0) {
                 return;
             }
-            var searchResults = this.store.findQuery('movie', {q: query, limit: 10});
-			this.transitionToRoute('movies.search', {query: query, searchResults: searchResults});
+           
+            var searchResults = this.store.findQuery('movie', {
+				q: query, 
+				limit: Movies.MOVIES_PER_PAGE,
+				offset: 1
+            });	
+			this.transitionToRoute('movies.search', {
+				query: query,
+				searchResults: searchResults
+			});
 		}
 	}
-});
-
-Movies.MovieController = Ember.ObjectController.extend({
-	directorInflection: function() {
-		var model = this.get('model');
-		var director = model.get('directors');
-		if (director && director != null) {
-			return director.indexOf(',') > 0 ? 'Directors' : 'Director';
-		}
-		return '';
-	}.property('model.directorInflection')
 });

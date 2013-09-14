@@ -1,3 +1,6 @@
 .movie-box:nth-child(4n+1) {
     clear: left;
 }
+.see-more-button {
+	margin-top: 20px;
+}

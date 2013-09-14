@@ -23,27 +23,34 @@
 						</div>
 					</div>
 					<div class="row">
-						{{outlet}}	
+						{{outlet}}		
 					</div>
 				</div>
 			</div>
 		</div>
     </script>
     <script type="text/x-handlebars" data-template-name="movies/search">
-		{{#each movie in searchResults itemController="movie"}}
+		{{#each movie in movies itemController="movie"}}
 			<div class="col-sm-6 col-md-3 movie-box">
 				<div class="thumbnail">
 					<img {{bindAttr src="movie.image"}}>
 					<div class="caption">
-						<h3>{{movie.title}}</h3>
-						<p>{{movie.synopsis}}</p>
+						<h3>{{{movie.title}}}</h3>
+						<p>{{{movie.synopsis}}}</p>
 						{{#if movie.directors}}
-							<p><b>{{directorInflection}}:&nbsp;</b>{{movie.directors}}</p>
+							<p><b>{{directorInflection}}:&nbsp;</b>{{{movie.directors}}}</p>
 						{{/if}}
 					</div>
 				</div>	
 			</div>
-		{{/each}}		
+		{{/each}}
+		{{#if movies.length}}
+			<div class="col-sm-12 col-md-12">
+				<button type="button" 
+					class="btn btn-default pull-right see-more-button"
+					{{action "seeMore"}}>See More</button>
+			</div>
+		{{/if}}
     </script>
     
     <script src="js/libs/jquery-1.10.2.min.js"></script>
@@ -56,6 +63,8 @@
 	<script src="js/router.js"></script>
 	<script src="js/models/movie.js"></script>
 	<script src="js/controllers/movies-controller.js"></script>
+	<script src="js/controllers/movies-search-controller.js"></script>
+	<script src="js/controllers/movie-controller.js"></script>
 	
   </body>
 </html>

@@ -18,7 +18,11 @@ Movies.MoviesIndexRoute = Ember.Route.extend({
 
 Movies.MoviesSearchRoute = Ember.Route.extend({
 	model: function(params) {
-		var searchResults = this.store.findQuery('movie', {q: params.query, limit: 10});
+		var searchResults = this.store.findQuery('movie', {
+			q: params.query, 
+			limit: Movies.MOVIES_PER_PAGE,
+			offset: 1
+		});
 		return {query: params.query, searchResults: searchResults}
 	},
 
@@ -27,6 +31,9 @@ Movies.MoviesSearchRoute = Ember.Route.extend({
 	},
 	
 	setupController: function(controller, model) {
-		controller.set('model', model);
+		controller.set('query', model.query);
+		model.searchResults.then(function(movies) {
+			controller.set('movies', movies);
+		});
 	}
 });
